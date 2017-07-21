@@ -6,14 +6,17 @@
     element.style.border = "thick solid #0000FF";
 
     picked.parent = element.parentElement;
+    picked.inspect = function() {
+      console.log(element);
+    };
     picked.unpick = function() {
         element.style.border = border;
-    }
+    };
   }
 
   document.addEventListener("mouseover",function(event) {
     picked.unpick();
-    pick(event.target)
+    pick(event.target);
   });
 
   document.addEventListener("keyup", function(event) {
@@ -21,8 +24,13 @@
       picked.unpick();
       pick(picked.parent);
     }
+
+    if (event.key == "q") {
+      picked.inspect();
+    }
   });
 }({
   parent: {},
+  inspect: function() {},
   unpick: function() {}
 }));
